@@ -9,6 +9,9 @@ let speed = 5;
 let lastPaintTime = 0;
 let snakeArr = [{x: 13, y: 15}];
 food = {x: 6, y: 7};
+let Toplay = null;
+const toggle = document.querySelector('.switch input')
+
 //Game functions
 
 const main = (ctime) => {
@@ -101,7 +104,9 @@ else{
 }
 window.requestAnimationFrame(main);
 window.addEventListener('keydown',e => {
-    gameSound.play();    
+    if(Toplay){
+        gameSound.play();    
+    }
     moveSound.play();
     inp_dir = {x:0, y: 1} //Start the Game
     switch (e.key) {
@@ -127,5 +132,16 @@ window.addEventListener('keydown',e => {
             break;
         default:
             break;
+    }
+});
+
+
+toggle.addEventListener('click',() => {
+    console.log("checked");
+    if(toggle.checked){
+        Toplay = true;
+    }else{
+        gameSound.pause();
+        Toplay = false;
     }
 });
